@@ -228,7 +228,7 @@ void osd_get_path(int pathtype, char* path)
          snprintf(path, PATH_MAX_LENGTH, "%s%s%s%s%s", options.libretro_system_path, path_default_slash(), APPNAME, path_default_slash(), "artwork");
          break;
       case FILETYPE_SAMPLE:
-         snprintf(path, PATH_MAX_LENGTH, "%s%s%s%s%s", options.libretro_system_path, path_default_slash(), APPNAME, path_default_slash(), "samples");
+         snprintf(path, PATH_MAX_LENGTH, "%s%s%s", options.libretro_system_path, path_default_slash(), "samples");
          break;
       default:
          /* .dat files and additional core content goes in mame2003 system directory */
@@ -244,7 +244,7 @@ int osd_get_path_info(int pathtype, int pathindex, const char *filename)
    osd_get_path(pathtype, currDir);
    snprintf(buffer, PATH_MAX_LENGTH, "%s%s%s", currDir, path_default_slash(), filename);
 
-   /*log_cb(RETRO_LOG_INFO, LOGPRE "osd_get_path_info (buffer = [%s]), (directory: [%s]), (path type: [%d]), (filename: [%s]) \n", buffer, currDir, pathtype, filename);*/
+   // log_cb(RETRO_LOG_INFO, "osd_get_path_info (buffer = [%s]), (directory: [%s]), (path type: [%d]), (filename: [%s]) \n", buffer, currDir, pathtype, filename);
 
    if (path_is_directory(buffer))
       return PATH_IS_DIRECTORY;
@@ -264,6 +264,8 @@ FILE* osd_fopen(int pathtype, int pathindex, const char *filename, const char *m
    snprintf(buffer, PATH_MAX_LENGTH, "%s%s%s", currDir, path_default_slash(), filename);
 
    path_mkdir(currDir);
+
+   // log_cb(RETRO_LOG_INFO, "osd_fopen (buffer = [%s])\n", buffer);
 
    out = fopen(buffer, mode);
 

@@ -26,7 +26,8 @@
 //#define MEM_DUMP
 //#define CHECK_MASKS
 
-
+// disable verbose logging
+#define logerror
 
 /***************************************************************************
 
