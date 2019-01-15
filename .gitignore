@@ -3,3 +3,5 @@
 *.o
 package.json
 .npmignore
+/libs/
+/obj/
