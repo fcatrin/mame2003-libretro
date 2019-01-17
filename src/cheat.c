@@ -1805,6 +1805,10 @@ int cheat_menu(struct mame_bitmap * bitmap, int selection)
 
 	cheatEngineWasActive = 1;
 
+	if (options.retrox_simple) {
+		return EnableDisableCheatMenu(bitmap, selection, firstEntry);
+	}
+
 	total = 0;
 	sel = selection - 1;
 

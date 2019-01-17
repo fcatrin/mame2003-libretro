@@ -180,6 +180,7 @@ struct GameOptions
 	int 	 skip_disclaimer;	    /* 1 to skip the disclaimer screen at startup */
 	int 	 skip_gameinfo;		    /* 1 to skip the game info screen at startup */
     int      skip_warnings;         /* 1 to skip the game warning screen at startup */
+    int      retrox_simple;         /* 1 to hide advanced options in menu */
     
     unsigned dial_share_xy;
     unsigned mouse_device;

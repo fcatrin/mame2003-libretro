@@ -316,6 +316,19 @@ static void update_variables(void)
    }
    else
       options.skip_warnings = 0;
+
+   var.value = NULL;
+   var.key = APPNAME"-retrox_simple";
+
+   if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
+   {
+      if(strcmp(var.value, "enabled") == 0)
+         options.retrox_simple = 1;
+      else
+         options.retrox_simple = 0;
+   }
+   else
+      options.retrox_simple = 1;
    
    var.value = NULL;
    var.key = APPNAME"-sample_rate";

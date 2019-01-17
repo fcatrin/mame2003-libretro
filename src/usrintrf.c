@@ -3082,7 +3082,7 @@ static void setup_menu_init(void)
 	{
 		extern int rapidfire_enable;
 
-		if (rapidfire_enable != 0)
+		if (rapidfire_enable != 0 && !options.retrox_simple)
 		{
 			menu_item[menu_total] = "Rapid Fire";
 			menu_action[menu_total++] = UI_RAPIDFIRE;
@@ -3119,16 +3119,20 @@ static void setup_menu_init(void)
 	}
 
 #ifndef MESS
-	menu_item[menu_total] = ui_getstring (UI_bookkeeping); menu_action[menu_total++] = UI_STATS;
+	if (!options.retrox_simple) {
+		menu_item[menu_total] = ui_getstring (UI_bookkeeping); menu_action[menu_total++] = UI_STATS;
+		menu_item[menu_total] = ui_getstring (UI_history); menu_action[menu_total++] = UI_HISTORY;
+	}
 	menu_item[menu_total] = ui_getstring (UI_gameinfo); menu_action[menu_total++] = UI_GAMEINFO;
-	menu_item[menu_total] = ui_getstring (UI_history); menu_action[menu_total++] = UI_HISTORY;
 #else
 	menu_item[menu_total] = ui_getstring (UI_imageinfo); menu_action[menu_total++] = UI_IMAGEINFO;
 	menu_item[menu_total] = ui_getstring (UI_filemanager); menu_action[menu_total++] = UI_FILEMANAGER;
 #if HAS_WAVE
 	menu_item[menu_total] = ui_getstring (UI_tapecontrol); menu_action[menu_total++] = UI_TAPECONTROL;
 #endif
-	menu_item[menu_total] = ui_getstring (UI_history); menu_action[menu_total++] = UI_HISTORY;
+	if (!options.retrox_simple) {
+		menu_item[menu_total] = ui_getstring (UI_history); menu_action[menu_total++] = UI_HISTORY;
+	}
 #endif
 
 	if (options.cheat)
@@ -3154,7 +3158,9 @@ static void setup_menu_init(void)
 	menu_item[menu_total] = ui_getstring (UI_resetgame); menu_action[menu_total++] = UI_RESET;
 #if !defined(WIIU) && !defined(GEKKO) && !defined(__CELLOS_LV2__) && !defined(__SWITCH__) && !defined(PSP) && !defined(VITA) && !defined(__GCW0__) && !defined(__EMSCRIPTEN__) && !defined(_XBOX)
     /* don't offer to generate_xml_dat on consoles where it can't be used */
-    menu_item[menu_total] = ui_getstring (UI_generate_xml_dat); menu_action[menu_total++] = UI_GENERATE_XML_DAT;
+	if (!options.retrox_simple) {
+		menu_item[menu_total] = ui_getstring (UI_generate_xml_dat); menu_action[menu_total++] = UI_GENERATE_XML_DAT;
+	}
 #endif
 	menu_item[menu_total] = ui_getstring (UI_returntogame); menu_action[menu_total++] = UI_EXIT;
 	menu_item[menu_total] = 0; /* terminate array */
